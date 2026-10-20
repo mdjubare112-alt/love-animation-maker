@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;overflow:hidden;
+ display:flex;align-items:center;justify-content:center;
+ flex-direction:column;text-align:center;
+ font-family:Arial,sans-serif;color:white;
+ background:linear-gradient(135deg,#240018,#a00048,#ff477e);
+}
+h1{font-size:clamp(30px,9vw,55px);animation:glow 1.5s infinite alternate}
+.heart{font-size:110px;animation:beat .8s infinite}
+p{font-size:20px}
+input,button{
+ padding:13px;margin:7px;border:0;border-radius:12px;
+ font-size:16px;max-width:85vw
+}
+button{background:#fff;color:#b00050;font-weight:bold}
+.float{
+ position:absolute;bottom:-40px;pointer-events:none;
+ animation:rise 5s linear forwards
+}
+@keyframes beat{50%{transform:scale(1.25)}}
+@keyframes glow{to{text-shadow:0 0 25px #ffb5d0}}
+@keyframes rise{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+</style>
+</head>
+<body>
+<h1 id="title">I LOVE YOU ❤️</h1>
+<div class="heart">❤️</div>
+<p>তুমি আমার হৃদয়ের সবচেয়ে প্রিয় মানুষ 💖</p>
+<input id="name" placeholder="এখানে নাম লেখো">
+<br>
+<button onclick="changeLove()">নাম দিয়ে তৈরি করো 💌</button>
+<button onclick="toggle()">অ্যানিমেশন বন্ধ/চালু</button>
+<script>
+let running=true;
+function changeLove(){
+ const n=document.getElementById('name').value.trim();
+ document.getElementById('title').textContent=
+ n?'I LOVE YOU '+n+' ❤️':'I LOVE YOU ❤️';
+}
+function toggle(){
+ running=!running;
+ document.querySelector('.heart').style.animationPlayState=
+ running?'running':'paused';
+}
+function floatHeart(){
+ if(!running)return;
+ const e=document.createElement('span');
+ e.className='float';
+ e.textContent=['❤️','💖','💕','🌹','✨'][Math.floor(Math.random()*5)];
+ e.style.left=Math.random()*95+'vw';
+ e.style.fontSize=(20+Math.random()*25)+'px';
+ document.body.appendChild(e);
+ setTimeout(()=>e.remove(),5000);
+}
+setInterval(floatHeart,350);
+</script>
+</body>
+</html>
